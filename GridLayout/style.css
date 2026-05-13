@@ -1,0 +1,186 @@
+/* ── Reset ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
+ 
+/* ════════════════════════════
+   MAIN WRAPPER — Grid Layout
+   Rows: header | main | footer
+════════════════════════════ */
+.wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+ 
+/* ════════════════════════════
+   HEADER
+════════════════════════════ */
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+ 
+.nav {
+  display: flex;
+  gap: 20px;
+}
+ 
+.nav a {
+  color: #cdd9e5;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+ 
+.nav a:hover {
+  color: white;
+}
+ 
+/* ════════════════════════════
+   MAIN AREA — Sidebar + Content
+════════════════════════════ */
+.main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  padding: 24px;
+}
+ 
+/* ── SIDEBAR ── */
+.sidebar {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  height: fit-content;
+  border: 1px solid #dde1e7;
+}
+ 
+.sidebar h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 14px;
+}
+ 
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+.sidebar ul li a {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9rem;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+ 
+.sidebar ul li a:hover {
+  background: #f0f2f5;
+  color: #2c3e50;
+}
+ 
+/* ── CONTENT ── */
+.content {
+  background: white;
+  border-radius: 8px;
+  padding: 28px;
+  border: 1px solid #dde1e7;
+}
+ 
+.content h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+ 
+.content > p {
+  color: #666;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+ 
+/* ── CARDS GRID inside content ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+ 
+.card {
+  background: #f8f9fb;
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+ 
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+ 
+.card h4 {
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+ 
+.card p {
+  font-size: 0.82rem;
+  color: #777;
+  line-height: 1.5;
+}
+ 
+/* ════════════════════════════
+   FOOTER
+════════════════════════════ */
+.footer {
+  background: #2c3e50;
+  color: #aab4be;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.82rem;
+}
+ 
+/* ════════════════════════════
+   RESPONSIVE — stack on mobile
+════════════════════════════ */
+@media (max-width: 640px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+ 
+  .cards {
+    grid-template-columns: 1fr;
+  }
+ 
+  .nav {
+    gap: 12px;
+  }
+}

@@ -1,0 +1,184 @@
+/* ═══════════════════════════════════════════
+   VoltGrid — Animations Stylesheet
+   ═══════════════════════════════════════════ */
+
+/* ── Pulse ── */
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,.6); }
+  50%      { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+}
+
+/* ── Reveal Base States ── */
+.reveal-up,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity .7s cubic-bezier(.4,0,.2,1),
+              transform .7s cubic-bezier(.4,0,.2,1);
+}
+.reveal-up    { transform: translateY(40px); }
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal-up.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Stagger via CSS custom property */
+.reveal-up[style*="--delay"],
+.reveal-left[style*="--delay"],
+.reveal-right[style*="--delay"] {
+  transition-delay: var(--delay, 0s);
+}
+
+/* ── Gradient shimmer on hero title ── */
+.hero-title .gradient-text {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Floating elements ── */
+@keyframes floatY {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* ── Typing cursor ── */
+.typewriter::after {
+  content: '|';
+  animation: blink .7s step-end infinite;
+  margin-left: 2px;
+  color: var(--green);
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ── Card hover micro shimmer ── */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(74,222,128,.06), transparent);
+  transition: left .6s ease;
+  pointer-events: none;
+}
+.service-card:hover::before { left: 160%; }
+
+/* ── Glowing border animation on featured price card ── */
+.price-featured {
+  animation: glowPulse 3s ease infinite;
+}
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 24px rgba(34,197,94,.2); }
+  50%      { box-shadow: 0 0 48px rgba(34,197,94,.4); }
+}
+
+/* ── Loader bar fill ── */
+@keyframes loaderFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Scroll dot bounce ── */
+@keyframes scrollBounce {
+  0%,100% { transform: translateY(0); opacity: 1; }
+  60%      { transform: translateY(14px); opacity: 0; }
+}
+
+/* ── Ring expand ── */
+@keyframes ringPulse {
+  0%,100% { transform: scale(1); opacity: .8; }
+  50%      { transform: scale(1.06); opacity: .3; }
+}
+
+/* ── Pin pulse ── */
+@keyframes pinPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+  70%      { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
+}
+
+/* ── Stat number count-up glow ── */
+.stat-num.counting {
+  animation: numGlow .3s ease;
+}
+@keyframes numGlow {
+  0%   { text-shadow: 0 0 0 rgba(74,222,128,0); }
+  50%  { text-shadow: 0 0 24px rgba(74,222,128,.6); }
+  100% { text-shadow: 0 0 0 rgba(74,222,128,0); }
+}
+
+/* ── Charge fill animation ── */
+@keyframes chargeFill {
+  from { width: 0%; }
+  to   { width: 74%; }
+}
+.cbw-fill {
+  animation: chargeFill 2.5s cubic-bezier(.4,0,.2,1) 1s forwards;
+  width: 0%;
+}
+
+/* ── Hero orb drift ── */
+.orb-1 { animation: orbDrift1 12s ease-in-out infinite; }
+.orb-2 { animation: orbDrift2 16s ease-in-out infinite; }
+.orb-3 { animation: orbDrift3 10s ease-in-out infinite; }
+@keyframes orbDrift1 {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(-30px, 20px); }
+}
+@keyframes orbDrift2 {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(20px, -30px); }
+}
+@keyframes orbDrift3 {
+  0%,100% { transform: translate(0,0); }
+  50%      { transform: translate(-20px, -20px); }
+}
+
+/* ── Phone float ── */
+.phone-img {
+  animation: phoneFloat 6s ease-in-out infinite;
+}
+@keyframes phoneFloat {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-18px) rotate(2deg); }
+}
+
+/* ── Hamburger open state ── */
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ── Back to top button ── */
+.back-to-top {
+  transition: opacity .3s ease, visibility .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+
+/* ── Navbar scroll transition ── */
+.navbar { transition: background .35s ease, box-shadow .35s ease, backdrop-filter .35s ease; }
+
+/* ── Dark/light mode smooth transition ── */
+body {
+  transition: background .4s ease, color .4s ease;
+}
+
+/* ── Social icon ring on hover ── */
+.social-links a::before {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-neon), var(--green-dark));
+  opacity: 0;
+  transition: opacity .3s ease;
+  z-index: -1;
+}
+.social-links a { position: relative; }
