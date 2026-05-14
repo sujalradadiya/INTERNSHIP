@@ -9,6 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    // Check if the user has registered, if not, redirect to registration
+    if (!localStorage.getItem('isRegistered')) {
+      window.location.href = 'registration.html';
+    }
+    //------------------------->>
+  </script>
 </head>
 <body class="light-mode">
 
@@ -36,6 +43,7 @@
         <li><a href="#stations">Stations</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="registration.html">Register</a></li>
       </ul>
       <div class="nav-actions">
         <button id="themeToggle" class="theme-btn" title="Toggle Dark Mode">

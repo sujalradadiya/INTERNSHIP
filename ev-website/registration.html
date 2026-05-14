@@ -302,17 +302,17 @@
 
       e.preventDefault();
 
-      // Show Toast
+      // Mark user as registered in localStorage
+      localStorage.setItem('isRegistered', 'true');
 
+      // Show Toast
       toast.classList.add("show");
 
-      // Hide Toast after 3 sec
-
+      // Hide Toast after 2 seconds and redirect to the main website
       setTimeout(() => {
-
         toast.classList.remove("show");
-
-      }, 3000);
+        window.location.href = 'index.html';
+      }, 2000);
 
     });
 
