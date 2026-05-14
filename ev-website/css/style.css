@@ -1170,3 +1170,28 @@ input, select, textarea, button { font-family: inherit; }
   .pricing-grid { max-width: 100%; }
   .card-a, .card-b { display: none; }
 }
+
+/* ══════════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════════ */
+.custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px; height: 24px;
+  font-size: 50px;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease-out;
+}
+
+/* Hide default cursor to make it look clean */
+body, a, button, input, textarea, select, .theme-btn, .hamburger {
+  cursor: none !important;
+}
+
+/* Enlarge when hovering over clickable things */
+body.hovering-link .custom-cursor {
+  transform: translate(-50%, -50%) scale(1.6);
+}

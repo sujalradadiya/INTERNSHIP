@@ -178,7 +178,7 @@
       position:fixed;
       top:20px;
       right:20px;
-      background:#22c55e;
+      background:#0d024c2a;
       color:white;
       padding:15px 25px;
       border-radius:10px;
@@ -204,6 +204,12 @@
     }
 
   </style>
+  <script>
+    const submithandler=(data)=>{
+        console.log("=== User Registration Data ===");
+        console.log(data);
+    }
+  </script>
 </head>
 <body>
 
@@ -242,44 +248,44 @@
 
         <div class="input-box">
           <label>First Name</label>
-          <input type="text" placeholder="Enter first name" required>
+          <input type="text" name="firstName" placeholder="Enter first name" required>
         </div>
 
         <div class="input-box">
           <label>Last Name</label>
-          <input type="text" placeholder="Enter last name" required>
+          <input type="text" name="lastName" placeholder="Enter last name" required>
         </div>
 
         <div class="input-box">
           <label>Email</label>
-          <input type="email" placeholder="Enter email" required>
+          <input type="email" name="email" placeholder="Enter email" required>
         </div>
 
         <div class="input-box">
           <label>Phone Number</label>
-          <input type="tel" placeholder="Enter phone number" required>
+          <input type="tel" name="phone" placeholder="Enter phone number" required>
         </div>
 
         <div class="input-box">
           <label>Gender</label>
 
           <div class="gender">
-            <label><input type="radio" name="gender"> Male</label>
-            <label><input type="radio" name="gender"> Female</label>
-            <label><input type="radio" name="gender"> Other</label>
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
           </div>
         </div>
 
         <div class="input-box">
           <label>Address</label>
-          <textarea rows="4" placeholder="Enter address"></textarea>
+          <textarea name="address" rows="4" placeholder="Enter address"></textarea>
         </div>
 
         <div class="input-box">
           <label>Upload PDF</label>
 
           <div class="pdf-upload">
-            <input type="file" accept=".pdf">
+            <input type="file" name="pdfFile" accept=".pdf">
           </div>
         </div>
 
@@ -302,8 +308,18 @@
 
       e.preventDefault();
 
-      // Mark user as registered in localStorage
-      localStorage.setItem('isRegistered', 'true');
+      // Collect data from the form
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Save the data to sessionStorage so it survives the redirect!
+      sessionStorage.setItem('userData', JSON.stringify(data));
+
+      // Call the submithandler function you made
+      submithandler(data);
+
+      // Mark user as registered for this session
+      sessionStorage.setItem('isRegistered', 'true');
 
       // Show Toast
       toast.classList.add("show");

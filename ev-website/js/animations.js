@@ -72,3 +72,18 @@ window.addEventListener('scroll', () => {
     }
   });
 }, { passive: true });
+
+/* ── Custom Cursor Tracking ── */
+const cursor = document.querySelector('.custom-cursor');
+if (cursor) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  // Make it pop when hovering over links/buttons
+  document.querySelectorAll('a, button, input, textarea, select, .map-pin').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hovering-link'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering-link'));
+  });
+}
