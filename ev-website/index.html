@@ -14,15 +14,38 @@
     if (!sessionStorage.getItem('isRegistered')) {
       window.location.href = 'registration.html';
     } else {
-      // If they are registered, print their data to the console!
-      const userData = sessionStorage.getItem('userData');
-      if (userData) {
-        console.log("=== Welcome! User Registration Data Received ===");
-        console.log(JSON.parse(userData));
-      }
-    }
+      // If they are registered, update UI after DOM loads
+      document.addEventListener("DOMContentLoaded", () => {
+        const userDataStr = sessionStorage.getItem('userData');
+        if (userDataStr) {
+          try {
+            const userData = JSON.parse(userDataStr);
+            console.log("=== Welcome! User Registration Data Received ===");
+            console.log(userData);
+            const navLinks = document.getElementById("navLinks");
 
-    // 
+            if (navLinks) {
+              const registerLi = Array.from(navLinks.querySelectorAll("li")).find(li => li.textContent.includes("Register"));
+              if (registerLi) {
+                registerLi.innerHTML = `<a href="#">Welcome, ${userData.firstName}!</a>`;
+              }
+              // Add a logout button
+              const logoutLi = document.createElement("li");
+              logoutLi.innerHTML = `<a href="#" id="logoutBtn" style="color: #ff4d4d; font-weight: bold;"><i class="fas fa-sign-out-alt"></i> Logout</a>`;
+              navLinks.appendChild(logoutLi);
+              
+              document.getElementById("logoutBtn").addEventListener("click", (e) => {
+                e.preventDefault();
+                sessionStorage.clear();
+                window.location.href = 'registration.html';
+              });
+            }
+          } catch(e) { 
+            console.error("Error parsing user data", e);
+          }
+        }
+      });
+    }
   </script>
 </head>
 <body class="light-mode">

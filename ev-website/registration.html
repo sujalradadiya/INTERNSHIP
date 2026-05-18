@@ -216,7 +216,7 @@
   <!-- Toast Message -->
 
   <div id="toast" class="toast">
-    Registration Completed Successfully ✅
+    Registration Completed Successfully....!
   </div>
 
   <div class="main">
@@ -263,7 +263,7 @@
 
         <div class="input-box">
           <label>Phone Number</label>
-          <input type="tel" name="phone" placeholder="Enter phone number" required>
+          <input type="tel" name="phone" placeholder="Enter 10-digit phone number" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
         </div>
 
         <div class="input-box">
@@ -305,31 +305,46 @@
     const toast = document.getElementById("toast");
 
     form.addEventListener("submit", function(e){
-
       e.preventDefault();
 
       // Collect data from the form
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
+      const fileField = data.pdfFile;
 
-      // Save the data to sessionStorage so it survives the redirect!
-      sessionStorage.setItem('userData', JSON.stringify(data));
+      // Helper function to save and redirect
+      const saveAndRedirect = (finalData) => {
+        // Save the data to sessionStorage so it survives the redirect!
+        sessionStorage.setItem('userData', JSON.stringify(finalData));
 
-      // Call the submithandler function you made
-      submithandler(data);
+        // Call the submithandler function you made
+        submithandler(finalData);
 
-      // Mark user as registered for this session
-      sessionStorage.setItem('isRegistered', 'true');
+        // Mark user as registered for this session
+        sessionStorage.setItem('isRegistered', 'true');
 
-      // Show Toast
-      toast.classList.add("show");
+        // Show Toast
+        toast.classList.add("show");
 
-      // Hide Toast after 2 seconds and redirect to the main website
-      setTimeout(() => {
-        toast.classList.remove("show");
-        window.location.href = 'index.html';
-      }, 2000);
+        // Hide Toast after 2 seconds and redirect to the main website
+        setTimeout(() => {
+          toast.classList.remove("show");
+          window.location.href = 'index.html';
+        }, 2000);
+      };
 
+      // Check if there is a file and convert it to Base64
+      if (fileField && fileField.size > 0) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          data.pdfFile = event.target.result; // base64 string
+          saveAndRedirect(data);
+        };
+        reader.readAsDataURL(fileField);
+      } else {
+        // If no file was uploaded, save directly
+        saveAndRedirect(data);
+      }
     });
 
   </script>
